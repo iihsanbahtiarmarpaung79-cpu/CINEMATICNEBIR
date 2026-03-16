@@ -1,0 +1,5 @@
+{
+  "name": "NEBIR",
+  "description": "Analyze videos and generate structured prompts in JSON and plain text formats using Google's Gemini AI.",
+  "requestFramePermissions": []
+}
