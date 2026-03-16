@@ -57,6 +57,11 @@ export default function App() {
     message: '',
   });
   
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    // Optional: Add a toast notification here
+  };
+
   const handleSaveKey = (e: React.FormEvent) => {
     e.preventDefault();
     if (apiKey.trim()) {
@@ -309,11 +314,29 @@ export default function App() {
                       <FileJson className="w-4 h-4" /> JSON
                     </button>
                   </div>
-                  <div className="bg-black/40 p-6 rounded-2xl border border-white/5 font-mono text-sm text-gray-300 overflow-auto max-h-[500px]">
-                    {state.result.plainText}
+                  <div className="relative">
+                    <button 
+                      onClick={() => copyToClipboard(state.result!.plainText)}
+                      className="absolute top-2 right-2 p-2 bg-white/10 hover:bg-white/20 rounded-lg text-gray-400 hover:text-white transition-all"
+                      title="Salin ke clipboard"
+                    >
+                      <Copy className="w-4 h-4" />
+                    </button>
+                    <div className="bg-black/40 p-6 rounded-2xl border border-white/5 font-mono text-sm text-gray-300 overflow-auto max-h-[500px]">
+                      {state.result.plainText}
+                    </div>
                   </div>
-                  <div className="bg-black/40 p-6 rounded-2xl border border-white/5 font-mono text-sm text-gray-300 overflow-auto max-h-[500px]">
-                    <pre>{JSON.stringify(state.result.json, null, 2)}</pre>
+                  <div className="relative">
+                    <button 
+                      onClick={() => copyToClipboard(JSON.stringify(state.result!.json, null, 2))}
+                      className="absolute top-2 right-2 p-2 bg-white/10 hover:bg-white/20 rounded-lg text-gray-400 hover:text-white transition-all"
+                      title="Salin ke clipboard"
+                    >
+                      <Copy className="w-4 h-4" />
+                    </button>
+                    <div className="bg-black/40 p-6 rounded-2xl border border-white/5 font-mono text-sm text-gray-300 overflow-auto max-h-[500px]">
+                      <pre>{JSON.stringify(state.result.json, null, 2)}</pre>
+                    </div>
                   </div>
                 </motion.div>
               )}
